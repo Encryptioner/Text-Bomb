@@ -22,6 +22,7 @@ $ python manage.py migrate
 $ python3 manage.py createsuperuser
 
 $ sudo docker run -p 6379:6379 -d redis:2.8
+
 #Needed to be run after any change in tasks.py or celery.py
 $ celery -A django_project worker -l info OR celery -A proj beat -l INFO
 
@@ -67,7 +68,7 @@ sefatullah.test18@gmail.com
 
 8. All contact list is not shown yet and there is no one to one relationship for chatting is not made yet, so any logged in user entering that link can participant in chat.
 
-9. Functionality of this chat app is in progress and will be updated soon.
+9. The number of newly registered user will be sent to every user in every hour. Functionality of this chat app is in progress and will be updated soon.
 
 10. Thanks for reading. A folder of screenshots has been uploaded for detailed view.
 
@@ -80,142 +81,6 @@ sefatullah.test18@gmail.com
 
 
 
-
-
-
-
-workon web
-
-toggleglobalsitepackages [-q] (to access global site-packages if not accessed)
-
-python3 -m django --version
-
-django-admin
-
-cd 
-
-django-admin startproject django_project
-
-python mange.py runserver
-
-python manage.py startapp users
-
-
-// for database
-
-python manage.py makemigrations
-
-python manage.py migrate
-
-python manage.py createsuperuser
-
-python manage.py makemigrations
-
-python manage.py sqlmigrate blog 0001
-
-python manage.py migrate
-
-python manage.py shell
-
-
-in python
-{
-
->>> from blog.models import Post
->>> from django.contrib.auth.models import User
->>> User.objects.all()
-<QuerySet [<User: ankur>, <User: test>]>
->>> User.objects.first()
-<User: ankur>
->>> User.objects.filter(username='ankur')
-<QuerySet [<User: ankur>]>
->>> User.objects.filter(username='ankur').first()
-<User: ankur>
->>> user = User.objects.filter(username='ankur').first()
->>> user
-<User: ankur>
->>> user.id
-1
->>> user.pk
-1
->>> user = User.objects.get(id=1)
->>> user
-<User: ankur>
->>> Post.objects.all()
-<QuerySet []>
->>> post_1 = Post(title='Blog 1', content='First post content!', author=user)
->>> Post.objects.all()
-<QuerySet []>
->>> post_1.save()
->>> Post.objects.all()
-<QuerySet [<Post: Post object (1)>]>
->>> exit()
-
->>> from blog.models import Post
->>> from django.contrib.auth.models import User
->>> user = User.objects.filter(username='ankur').first()
->>> Post.objects.all()
-<QuerySet [<Post: Blog 1>]>
->>> post_2 = Post(title='Blog 2', content='Second post content!', author_id=user.id)
->>> post_2.save()
->>> Post.objects.all()
-<QuerySet [<Post: Blog 1>, <Post: Blog 2>]>
-
->>> post = Post.objects.first()
->>> post.content
-'First post content!'
->>> post.date_posted
-datetime.datetime(2019, 2, 4, 9, 37, 0, 721326, tzinfo=<UTC>)
->>> post.author
-<User: ankur>
->>> post.author.email
-'mir.ankur.ruet13@gmail.com'
->>> user.post_set
-<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x7f6f856b9e10>
->>> user.post_set.all()
-<QuerySet [<Post: Blog 1>, <Post: Blog 2>]>
->>> user.post_set.create(title='Blog 3', content='Third post content!') <Post: Blog 3>
->>> Post.objects.all()
-<QuerySet [<Post: Blog 1>, <Post: Blog 2>, <Post: Blog 3>]>
->>> exit()
-
-
-
-}
-
-
-
-{
-
->>> from django.contrib.auth.models import User
->>> user = User.objects.filter(username='ankur').first()
->>> user
-<User: ankur>
->>> user.profile
-<Profile: ankur Profile>
->>> user.profile.image
-<ImageFieldFile: profile_pics/kdef_plot.png>
->>> user.profile.image.width
-618
->>> user.profile.image.url
-'profile_pics/kdef_plot.png'
->>> user = User.objects.filter(username='test3').first()
->>> user
-<User: test3>
->>> user.profile.image
-<ImageFieldFile: default.jpg>
->>> exit()
-
-
-}
-
-
-$ sudo rabbitmq-server
-
-$ sudo rabbitmqctl stop
-
-
-python3 ./manage.py shell
 
 
 
